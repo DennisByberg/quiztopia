@@ -1,0 +1,47 @@
+@import "../../sass/colors";
+@import "../../sass/fonts";
+
+.footer {
+  //   border: 1px dotted red;
+  padding: 0.5rem 0;
+  text-align: center;
+
+  // - Project made by
+  p {
+    font-size: 1.8rem;
+    color: rgba(255, 255, 255, 0.164);
+    @include fontFamilyWaitingForTheSunrise;
+  }
+
+  // - Dennis Byberg
+  a {
+    color: rgba(255, 255, 255, 0.164);
+    @include fontFamilyWaitingForTheSunrise;
+    font-size: 2rem;
+    text-decoration: none;
+
+    &:hover {
+      color: $darkOrange;
+    }
+  }
+}
+
+////////////////////////////////////
+//        | MEDIA QUERY |         //
+///////////////////////////////////
+/*✘| MEDIUM / TABLET |✘*/
+@media only screen and (min-width: 501px) and (max-width: 750px) {
+}
+
+/*✘| SMALL / MOBILE |✘*/
+@media only screen and (min-width: 0px) and (max-width: 500px) {
+  .footer {
+    p {
+      font-size: 1rem;
+    }
+
+    a {
+      font-size: 1rem;
+    }
+  }
+}
