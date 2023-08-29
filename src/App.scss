@@ -8,11 +8,16 @@
   user-select: none;
 }
 
-body {
-  background-color: $darkGrey;
-}
-
 .App {
-  background-color: $darkGrey;
-  @include fontFamilyHelvetica;
+  min-height: 100vh;
+
+  &--light {
+    background-color: $white;
+    color: $black;
+  }
+
+  &--dark {
+    background-color: $darkGrey;
+    color: $white;
+  }
 }
