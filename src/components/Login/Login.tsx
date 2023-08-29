@@ -6,6 +6,7 @@ function Login() {
 
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [token, setToken] = useState<string>("");
 
   // Sign Up
   async function handleSignUp() {
@@ -17,7 +18,7 @@ function Login() {
       method: "POST",
       body: JSON.stringify(body),
     });
-    const data: any = await response.json(); // ANY!!!!
+    const data: ISignUpApiResponse = await response.json();
     console.log("handleSignUp:", data);
   }
 
@@ -31,16 +32,27 @@ function Login() {
       method: "POST",
       body: JSON.stringify(body),
     });
-    const data: any = await response.json(); // ANY!!!!
+    const data: ILoginApiResponse = await response.json();
     console.log(data);
   }
 
   return (
     <section className="login">
-      <input type="text" placeholder="Username..." />
-      <input type="password" placeholder="Password..." />
-      <button onClick={handleSignUp}> Skapa användare </button>
-      <button onClick={handleLogin}> Logga in </button>
+      <h1>Quiztopia</h1>
+      <div className="login__container">
+        <input
+          onChange={(e) => setUsername(e.target.value)}
+          type="text"
+          placeholder="Username..."
+        />
+        <input
+          onChange={(e) => setPassword(e.target.value)}
+          type="password"
+          placeholder="Password..."
+        />
+        <button onClick={handleSignUp}> Sign Up </button>
+        <button onClick={handleLogin}> Log In </button>
+      </div>
     </section>
   );
 }
