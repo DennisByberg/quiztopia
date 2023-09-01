@@ -10,17 +10,9 @@
   // max-width: 700px;
   // padding: 8rem 10rem;
   // gap: 3rem;
-  h1 {
-    text-align: center;
-    margin: 2rem;
-    font-size: 5rem;
 
-    background: -webkit-linear-gradient(#ffffff, #ff7b3d);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  &__container {
+  &__container,
+  &__logged-in-container {
     border: 1px solid rgba(0, 0, 0, 0.644);
     box-shadow: 5px 5px 8px black;
 
@@ -47,6 +39,11 @@
     p {
       color: white;
       margin: 1rem;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 2rem;
     }
 
     button {

@@ -1,0 +1,10 @@
+@import "../../sass/colors";
+
+.game-page {
+  //   border: 2px dotted red;
+  margin: 0rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+}

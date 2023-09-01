@@ -8,6 +8,7 @@ function Header() {
   return (
     <header className="header">
       <img className="header__hillsLogo" src={quiztopiaLogo} />
+      <h1>Quiztopia</h1>
       <Toggle />
     </header>
   );

@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage";
 import { useSelector } from "react-redux";
 import { RootState } from "./redux/store";
+import GamePage from "./pages/GamePage/GamePage";
 
 function App() {
   const darkMode = useSelector((state: RootState) => state.darkMode);
@@ -10,6 +11,10 @@ function App() {
     {
       path: "/",
       element: <HomePage />,
+    },
+    {
+      path: "/game",
+      element: <GamePage />,
     },
   ]);
 
