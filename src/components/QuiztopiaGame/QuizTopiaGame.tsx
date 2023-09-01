@@ -5,7 +5,7 @@ import { RootState } from "../../redux/store";
 import { useEffect, useState, useRef } from "react";
 import mapboxgl, { Map as MapGl } from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { getPosition } from "../../Data/getPosition";
+// import { getPosition } from "../../Data/GetPosition";
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN as string;
 
