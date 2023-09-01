@@ -13,3 +13,8 @@ interface UserState {
   loggedInUser: string;
   loggedInToken: string;
 }
+
+interface Position {
+  latitude: number;
+  longitude: number;
+}
