@@ -5,7 +5,7 @@ import { RootState } from "../../redux/store";
 import { useEffect, useState, useRef } from "react";
 import mapboxgl, { Map as MapGl } from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-// import { getPosition } from "../../Data/GetPosition";
+import { getPosition } from "../../Data/getPosition";
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN as string;
 
@@ -21,13 +21,36 @@ function QuizTopiaGame() {
   const userName = useSelector((state: RootState) => state.user.loggedInUser);
   // const token = useSelector((state: RootState) => state.user.loggedInToken);
   const navigate = useNavigate();
-  // const [position, setPosition] = useState<Position | null>(null);
 
   useEffect(() => {
     if (!userName) {
       navigate("/");
     }
     if (mapRef.current || !mapContainer.current) return;
+
+    /**
+     * Hämtar och visar användarens nuvarande position på kartan
+     */
+    async function fetchPosition() {
+      const position = await getPosition();
+      const { latitude, longitude } = position;
+      console.log(position);
+
+      // Skapar en markör med den angivna färgen
+      new mapboxgl.Marker({ color: "red" })
+        .setLngLat([longitude, latitude])
+        .addTo(map);
+
+      // Skapar en popup
+      const popup = new mapboxgl.Popup({
+        offset: 25,
+        closeButton: false,
+      }).setHTML("<h3 style='color: black;'>You are here!</h3>");
+
+      // Lägger till popupen på kartan och specificerar koordinaterna
+      popup.addTo(map).setLngLat([longitude, latitude]);
+    }
+    fetchPosition();
 
     mapRef.current = new MapGl({
       container: mapContainer.current,
@@ -38,21 +61,12 @@ function QuizTopiaGame() {
     const map: MapGl = mapRef.current;
 
     map.on("move", () => {
-      interface Position {
-        lng: number;
-        lat: number;
-      }
-      const position: Position = map.getCenter();
+      const position: MapPosition = map.getCenter();
       setLat(Number(position.lat.toFixed(4)));
       setLng(Number(position.lng.toFixed(4)));
       setZoom(map.getZoom());
     });
   }, [lat, lng, zoom]);
-
-  // async function handleGetPostion() {
-  //   const pos: Position = await getPosition();
-  //   setPosition(pos);
-  // }
 
   return (
     <section className="quiztopia-game">

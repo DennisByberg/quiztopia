@@ -31,7 +31,7 @@ function Login() {
         throw new Error(`Error: ${response.status} - ${response.statusText}`);
       }
 
-      const data = await response.json();
+      const data: ISignUpApiResponse = await response.json();
       console.log("handleSignUp:", data);
     } catch (error) {
       console.error("Error in handleSignUp:", error);
@@ -54,7 +54,7 @@ function Login() {
         throw new Error(`Error: ${response.status} - ${response.statusText}`);
       }
 
-      const data = await response.json();
+      const data: ILoginApiResponse = await response.json();
       console.log(data);
 
       if (data.token) {
