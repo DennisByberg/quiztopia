@@ -7,7 +7,7 @@ import "./Header.scss";
 function Header() {
   return (
     <header className="header">
-      <img className="header__hillsLogo" src={quiztopiaLogo} />
+      <img src={quiztopiaLogo} />
       <h1>Quiztopia</h1>
       <Toggle />
     </header>

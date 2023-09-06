@@ -1,11 +1,17 @@
 import "./QuizCard.scss";
 
-function QuizCard({ userName, quizId, logPressedObject }: QuizCardProps) {
+function QuizCard({
+  userName,
+  quizId,
+  fetchAndProcessQuizData,
+}: IQuizCardProps) {
   return (
     <li className="quiz-card">
       <p>{userName}</p>
       <p>{quizId}</p>
-      <button onClick={() => logPressedObject(quizId)}>Show Questions</button>
+      <button onClick={() => fetchAndProcessQuizData(quizId)}>
+        Show Questions
+      </button>
     </li>
   );
 }

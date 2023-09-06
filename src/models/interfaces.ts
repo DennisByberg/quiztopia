@@ -7,19 +7,10 @@ interface IUserState {
 }
 
 interface IQuizzez {
-  questions: IQuestions[];
+  questions: IUserQuizzes[];
   quizId: string;
   userId: string;
   username: string;
-}
-
-interface IQuestions {
-  answer: string;
-  location: {
-    longitude: string;
-    latitude: string;
-  };
-  question: string;
 }
 
 interface IMapPosition {
@@ -45,10 +36,10 @@ interface IQuiztopiaMapProps {
   userQuizzes: IUserQuizzes[];
 }
 
-interface QuizCardProps {
+interface IQuizCardProps {
   userName: string;
   quizId: string;
-  logPressedObject: (quizId: string) => void;
+  fetchAndProcessQuizData: (clickedQuizCardId: string) => void;
 }
 
 interface IGetQuizezDataResponse {

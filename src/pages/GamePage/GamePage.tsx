@@ -2,7 +2,7 @@ import { useState } from "react";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import QuiztopiaMap from "../../components/QuiztopiaMap/QuiztopiaMap";
-import Quizzes from "../../components/Quizez/Quizzes";
+import Quizzes from "../../components/Quizzes/Quizzes";
 import "./GamePage.scss";
 
 function GamePage() {
