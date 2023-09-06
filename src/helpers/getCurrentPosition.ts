@@ -1,10 +1,14 @@
-async function getPosition(): Promise<Position> {
+/**
+ * Asynchronously retrieves the current geolocation position.
+ * @returns {Promise<Position>} A Promise that resolves with the geolocation position.
+ */
+export async function getCurrentPosition(): Promise<IPosition> {
   return new Promise((resolve, reject) => {
     if ("geolocation" in navigator) {
       const geo = navigator.geolocation;
       geo.getCurrentPosition(
         (pos) => {
-          const position: Position = {
+          const position: IPosition = {
             latitude: pos.coords.latitude,
             longitude: pos.coords.longitude,
           };
@@ -19,5 +23,3 @@ async function getPosition(): Promise<Position> {
     }
   });
 }
-
-export { getPosition };

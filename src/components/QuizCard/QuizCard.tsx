@@ -1,11 +1,11 @@
 import "./QuizCard.scss";
 
-function QuizCard({ userName, quizId }: QuizCardProps) {
+function QuizCard({ userName, quizId, logPressedObject }: QuizCardProps) {
   return (
     <li className="quiz-card">
       <p>{userName}</p>
       <p>{quizId}</p>
-      <button>Show Questions</button>
+      <button onClick={() => logPressedObject(quizId)}>Show Questions</button>
     </li>
   );
 }

@@ -1,32 +1,9 @@
-interface ISignUpApiResponse {
-  success: boolean;
-  message?: string;
-}
-
-interface ILoginApiResponse {
-  success: boolean;
-  message?: string;
-  token?: string;
-}
-
-interface UserState {
+//------------------------------//
+// INTERFACES
+//------------------------------//
+interface IUserState {
   loggedInUser: string;
   loggedInToken: string;
-}
-
-interface Position {
-  latitude: number;
-  longitude: number;
-}
-
-interface QuizCardProps {
-  userName: string;
-  quizId: string;
-}
-
-interface IGetQuizezDataResponse {
-  success: boolean;
-  quizzes?: IQuizzez[];
 }
 
 interface IQuizzez {
@@ -45,7 +22,54 @@ interface IQuestions {
   question: string;
 }
 
-interface MapPosition {
+interface IMapPosition {
   lat: number;
   lng: number;
+}
+
+interface IUserQuizzes {
+  question: string;
+  answer: string;
+  location: IPosition;
+}
+
+interface IPosition {
+  latitude: number;
+  longitude: number;
+}
+
+//------------------------------//
+// PROPS INTERFACES
+//------------------------------//
+interface IQuiztopiaMapProps {
+  userQuizzes: IUserQuizzes[];
+}
+
+interface QuizCardProps {
+  userName: string;
+  quizId: string;
+  logPressedObject: (quizId: string) => void;
+}
+
+interface IGetQuizezDataResponse {
+  success: boolean;
+  quizzes?: IQuizzez[];
+}
+
+interface IQuizzesProps {
+  setUserQuizzes: React.Dispatch<React.SetStateAction<IUserQuizzes[] | []>>;
+}
+
+//------------------------------//
+// API RESPOONSES INTERFACES
+//------------------------------//
+interface ISignUpApiResponse {
+  success: boolean;
+  message?: string;
+}
+
+interface ILoginApiResponse {
+  success: boolean;
+  message?: string;
+  token?: string;
 }

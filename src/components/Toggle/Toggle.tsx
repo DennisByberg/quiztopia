@@ -5,7 +5,7 @@ import { toggleDarkMode } from "../../redux/darkModeSlice";
 function Toggle() {
   const dispatch = useDispatch();
 
-  function handleToggle(): void {
+  function handleToggle() {
     dispatch(toggleDarkMode());
   }
 
