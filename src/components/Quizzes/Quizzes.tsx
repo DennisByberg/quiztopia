@@ -17,6 +17,7 @@ function Quizzes({ setUserQuizzes }: IQuizzesProps) {
         );
 
         const data: IGetQuizezDataResponse = await response.json();
+        console.log(data.quizzes);
 
         if (data.quizzes) {
           const quizComponents = data.quizzes

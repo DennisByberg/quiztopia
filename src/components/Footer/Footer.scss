@@ -6,14 +6,12 @@
   padding: 0.5rem 0;
   text-align: center;
 
-  // - Project made by
   p {
     font-size: 1.8rem;
     color: rgba(255, 255, 255, 0.164);
     @include fontFamilyWaitingForTheSunrise;
   }
 
-  // - Dennis Byberg
   a {
     color: rgba(255, 255, 255, 0.164);
     @include fontFamilyWaitingForTheSunrise;

@@ -33,7 +33,10 @@ interface IPosition {
 // PROPS INTERFACES
 //------------------------------//
 interface IQuiztopiaMapProps {
+  setNewQuestionLat: React.Dispatch<React.SetStateAction<number>>;
+  setNewQuestionLon: React.Dispatch<React.SetStateAction<number>>;
   userQuizzes: IUserQuizzes[];
+  isAddNewQuestionSliderOpen: boolean;
 }
 
 interface IQuizCardProps {

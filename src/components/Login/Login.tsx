@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useSelector, useDispatch } from "react-redux";
-import { setUser, clearUser } from "../../redux/userSlice";
-import { RootState, AppDispatch } from "../../redux/store";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../redux/userSlice";
+import { AppDispatch } from "../../redux/store";
 
 import "./Login.scss";
 

@@ -11,7 +11,12 @@ import { addMarkerAndQuestionToMap } from "../../helpers/addMarkerAndQuestionToM
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN as string;
 
-function QuiztopiaMap({ userQuizzes }: IQuiztopiaMapProps) {
+function QuiztopiaMap({
+  userQuizzes,
+  isAddNewQuestionSliderOpen,
+  setNewQuestionLat,
+  setNewQuestionLon,
+}: IQuiztopiaMapProps) {
   const mapContainer = useRef(null);
   const mapGL = useRef<MapGl | null>(null);
   const mapMarker = useRef<mapboxgl.Marker | null>(null);
@@ -51,6 +56,33 @@ function QuiztopiaMap({ userQuizzes }: IQuiztopiaMapProps) {
 
     markCurrentLocationOnMap(mapGL.current, mapMarker.current);
   }, [lat, lng, zoom]);
+
+  useEffect(() => {
+    if (isAddNewQuestionSliderOpen) {
+      // Add a click event listener to the map
+      mapGL.current?.on("click", (e) => {
+        // Get the clicked coordinates
+        const { lng, lat } = e.lngLat;
+
+        // Create a new marker at the clicked location
+        const newMarker = new mapboxgl.Marker()
+          .setLngLat([lng, lat])
+          .addTo(mapGL.current!);
+
+        // Remove the existing marker and popup if they exist
+        if (mapMarker.current) {
+          mapMarker.current.remove();
+        }
+
+        // Save the new marker to the ref
+        mapMarker.current = newMarker;
+
+        setNewQuestionLat(lat);
+        setNewQuestionLon(lng);
+        console.log(lng, lat);
+      });
+    }
+  }, [isAddNewQuestionSliderOpen]);
 
   useEffect(() => {
     userQuizzes.forEach((userQuiz: IUserQuizzes) => {
