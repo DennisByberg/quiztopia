@@ -1,12 +1,9 @@
 import "./App.scss";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage";
-import { useSelector } from "react-redux";
-import { RootState } from "./redux/store";
 import GamePage from "./pages/GamePage/GamePage";
 
 function App() {
-  const darkMode = useSelector((state: RootState) => state.darkMode);
   const router = createBrowserRouter([
     {
       path: "/",
@@ -19,7 +16,7 @@ function App() {
   ]);
 
   return (
-    <section className={`App ${darkMode ? "App--dark" : "App--light"}`}>
+    <section className="App">
       <RouterProvider router={router} />
     </section>
   );

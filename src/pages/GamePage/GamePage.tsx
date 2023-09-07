@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import QuiztopiaMap from "../../components/QuiztopiaMap/QuiztopiaMap";
 import Quizzes from "../../components/Quizzes/Quizzes";
@@ -17,6 +16,13 @@ function GamePage() {
   const [newQuestionLat, setNewQuestionLat] = useState<number>(0);
   const [newQuestionLon, setNewQuestionLon] = useState<number>(0);
 
+  function handleCreateNewQuiz() {
+    // Close all quizzes if they are currently open
+    isAllQuizzesOpen && setIsAllQuizzesOpen(false);
+
+    setisCreateNewQuizSliderOpen((prev) => !prev);
+  }
+
   return (
     <section className="game-page">
       <Header />
@@ -33,15 +39,14 @@ function GamePage() {
               ? "Hide Available Quizzes"
               : "Show Available Quizzes"}
           </button>
-          <button onClick={() => setisCreateNewQuizSliderOpen((prev) => !prev)}>
-            Create New Quiz
-          </button>
+          <button onClick={handleCreateNewQuiz}>Create New Quiz</button>
           <button onClick={() => setIsAddNewQuestion((prev) => !prev)}>
             Add New Question
           </button>
         </div>
       ) : (
         <AddNewQuestionToQuizForm
+          setIsAddNewQuestion={setIsAddNewQuestion}
           newQuestionLat={newQuestionLat}
           newQuestionLon={newQuestionLon}
         />
@@ -54,7 +59,6 @@ function GamePage() {
       ) : (
         ""
       )}
-      <Footer />
     </section>
   );
 }

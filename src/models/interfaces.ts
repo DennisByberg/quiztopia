@@ -39,6 +39,16 @@ interface IQuiztopiaMapProps {
   isAddNewQuestionSliderOpen: boolean;
 }
 
+interface IAddNewQuestionToQuizFormProps {
+  newQuestionLon: number;
+  newQuestionLat: number;
+  setIsAddNewQuestion: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+interface ICreateNewQuizSliderProps {
+  setisCreateNewQuizSliderOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 interface IQuizCardProps {
   userName: string;
   quizId: string;
@@ -66,4 +76,10 @@ interface ILoginApiResponse {
   success: boolean;
   message?: string;
   token?: string;
+}
+
+interface ICreateQuizResponse {
+  success: boolean;
+  message?: string;
+  quizId?: string;
 }

@@ -2,10 +2,44 @@
 @import "../../sass/fonts";
 
 .header {
-  // border: 1px dotted yellow;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 0;
+
+  img {
+    width: 55px;
+  }
+
+  h1 {
+    color: $orange;
+    text-shadow: 1px 1px 1px $black;
+    font-size: 25px;
+
+    span {
+      color: $white;
+      font-size: 30px;
+      text-shadow: 0 0 15px $orange;
+    }
+  }
+
+  &__logged-in-user-container {
+    display: flex;
+    font-size: 22px;
+    text-transform: uppercase;
+    color: $orange;
+    align-items: center;
+    gap: 1rem;
+
+    img {
+      width: 35px;
+    }
+
+    p {
+      color: $orange;
+      text-shadow: 1px 1px 1px $black;
+      font-size: 15px;
+      border-bottom: 1px solid $purpleTransparent8;
+    }
+  }
 }

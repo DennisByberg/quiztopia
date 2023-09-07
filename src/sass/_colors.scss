@@ -1,10 +1,27 @@
 // Solid Colors.
-$black: black;
-$white: white;
+$black: rgb(0, 0, 0);
+$white: rgb(255, 255, 255);
 $darkGrey: rgb(31, 31, 31);
 $grey: rgb(73, 73, 73);
-$red: red;
-$green: green;
-$blue: blue;
-$orange: #ff6529;
+$red: rgb(255, 0, 0);
+$green: rgb(0, 128, 0);
+$blue: rgb(0, 0, 255);
+
+// Responses.
+$errorRed: rgb(255, 29, 29);
+$successGreen: rgb(33, 255, 33);
+
+// Logo Colors.
+$orange: rgb(255, 101, 41);
 $darkOrange: rgb(229, 59, 7);
+
+// Transparents.
+$blackTransparent5: rgba(0, 0, 0, 0.5);
+
+$whiteTransparent1: rgba(255, 255, 255, 0.1);
+$whiteTransparent2: rgba(255, 255, 255, 0.2);
+$whiteTransparent4: rgba(255, 255, 255, 0.4);
+$whiteTransparent6: rgba(255, 255, 255, 0.6);
+
+$purpleTransparent5: rgba(179, 24, 156, 0.5);
+$purpleTransparent8: rgba(179, 24, 156, 0.8);

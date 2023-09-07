@@ -7,8 +7,8 @@ function QuizCard({
 }: IQuizCardProps) {
   return (
     <li className="quiz-card">
-      <p>{userName}</p>
-      <p>{quizId}</p>
+      <p className="quiz-card__quiz-name">{quizId}</p>
+      <p className="quiz-card__username">Made by {userName}</p>
       <button onClick={() => fetchAndProcessQuizData(quizId)}>
         Show Questions
       </button>

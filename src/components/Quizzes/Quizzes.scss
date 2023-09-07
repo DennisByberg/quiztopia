@@ -1,18 +1,25 @@
+@import "../../sass/colors";
+
 .quizzez {
-  padding: 1rem;
-  margin: 1rem 0;
+  margin: 1rem auto;
+
+  display: flex;
+  flex-direction: column;
+  max-width: 1000px;
 
   h2 {
     text-align: center;
     margin: 1rem 0;
-    border-bottom: 3px solid rgba(255, 255, 255, 0.082);
+    border-bottom: 3px solid $whiteTransparent1;
   }
+
   ul {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
-    gap: 1.5rem;
-    margin: 1rem 0;
+    justify-content: space-between;
+    gap: 2rem;
+    max-width: 1000px;
+    margin-inline: auto;
   }
 }

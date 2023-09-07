@@ -1,39 +1,40 @@
 import "./CreateNewQuizSlider.scss";
 import xPNG from "../../images/close.png";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
+import { createQuiz } from "../../helpers/createQuiz";
 
-function CreateNewQuizSlider({ setisCreateNewQuizSliderOpen }: any) {
+function CreateNewQuizSlider({
+  setisCreateNewQuizSliderOpen,
+}: ICreateNewQuizSliderProps) {
   const [quizName, setQuizName] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [successMessage, setSuccessMessage] = useState<string>("");
   const userToken = useSelector((state: RootState) => state.user.loggedInToken);
 
-  function handleCreateQuiz(event: any) {
+  function handleCreateQuiz(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
-
-    if (quizName.length < 5) return;
-    console.log(quizName);
-    console.log(userToken);
-    createQuiz(userToken, quizName);
+    createQuiz(
+      userToken,
+      quizName,
+      setSuccessMessage,
+      setErrorMessage,
+      setisCreateNewQuizSliderOpen
+    );
   }
 
-  async function createQuiz(token: string, newQuizName: string) {
-    const url = `${import.meta.env.VITE_SWAGGER_URL}/quiz`;
-
-    const settings = {
-      method: "POST",
-      headers: { Authorization: `Bearer ${token}` },
-      body: JSON.stringify({ name: newQuizName }),
-    };
-    const response = await fetch(url, settings);
-    console.log(response);
-    const data: any = await response.json();
-    console.log(data);
+  function handleQuizNameChange(e: ChangeEvent<HTMLInputElement>) {
+    setQuizName(e.target.value);
+    // Clear messages if it exists (if truthy)
+    errorMessage && setErrorMessage("");
+    successMessage && setSuccessMessage("");
   }
+
   return (
     <section className="create-new-quiz-slider">
       <img
-        onClick={() => setisCreateNewQuizSliderOpen((prev: any) => !prev)}
+        onClick={() => setisCreateNewQuizSliderOpen((prev) => !prev)}
         className="create-new-quiz-slider__close-btn"
         src={xPNG}
       />
@@ -41,10 +42,12 @@ function CreateNewQuizSlider({ setisCreateNewQuizSliderOpen }: any) {
         <fieldset>
           <legend>Create New Quiz</legend>
           <input
-            onChange={(e) => setQuizName(e.target.value)}
-            placeholder="Enter quizname here..."
+            onChange={handleQuizNameChange}
+            placeholder="Enter new quiz name"
             type="text"
           />
+          <p className="login__error-msg"> {errorMessage} </p>
+          <p className="login__success-msg"> {successMessage} </p>
           <button onClick={handleCreateQuiz}>Create Quiz</button>
         </fieldset>
       </form>

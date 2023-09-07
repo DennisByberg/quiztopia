@@ -108,9 +108,6 @@ function QuiztopiaMap({
   return (
     <section className="quiztopia-map">
       <div ref={mapContainer} className="quiztopia-map__container" />
-      <p>
-        Center position: {lat} lat, {lng} lng
-      </p>
     </section>
   );
 }
