@@ -12,6 +12,8 @@ function AddNewQuestionToQuizForm({
   const [quizNameInput, setQuizNameInput] = useState<string>("");
   const [questionInput, setQuestionInput] = useState<string>("");
   const [answerInput, setAnswerInput] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [successMessage, setSuccessMessage] = useState<string>("");
 
   const userToken = useSelector((state: RootState) => state.user.loggedInToken);
 
@@ -30,6 +32,7 @@ function AddNewQuestionToQuizForm({
         latitude: lat,
       },
     };
+
     const settings = {
       method: "POST",
       headers: {
@@ -38,9 +41,21 @@ function AddNewQuestionToQuizForm({
       },
       body: JSON.stringify(questionBody),
     };
+
     const response = await fetch(url, settings);
     const data = await response.json();
-    console.log(data);
+
+    if (data.success) {
+      setSuccessMessage("Successfully added quiz");
+      setTimeout(() => {
+        setSuccessMessage("");
+        setIsAddNewQuestion(false);
+      }, 1500);
+    } else {
+      setTimeout(() => {
+        setErrorMessage("Failed to add quiz");
+      }, 2000);
+    }
   }
 
   return (
@@ -72,11 +87,17 @@ function AddNewQuestionToQuizForm({
             <label>LON</label>
             <p>{newQuestionLon}</p>
           </div>
-          <p>
+          <p className="add-new-question-to-quiz-form__info-msg">
             Press somewhere on the map to put a pin and get your location
             numbers
           </p>
         </div>
+        <p className="add-new-question-to-quiz-form__error-msg">
+          {errorMessage}
+        </p>
+        <p className="add-new-question-to-quiz-form__success-msg">
+          {successMessage}
+        </p>
         <button onClick={handleAddQuestion}>Add Question</button>
       </fieldset>
     </form>

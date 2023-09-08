@@ -53,7 +53,6 @@ function Login() {
       );
 
       const data: ILoginApiResponse = await response.json();
-      console.log(data);
 
       if (data.token) {
         setToken(data.token);

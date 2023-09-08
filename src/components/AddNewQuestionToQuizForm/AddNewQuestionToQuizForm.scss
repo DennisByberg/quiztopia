@@ -7,15 +7,27 @@
   align-items: center;
   margin: 1rem 0;
 
-  input {
-    @include inputStyle1;
+  &__error-msg,
+  &__success-msg,
+  &__info-msg {
+    font-style: italic;
+    text-align: center;
   }
 
-  p {
-    text-align: center;
-    font-style: italic;
-    // font-size: 14px;
-    color: rgba(255, 255, 255, 0.151);
+  &__error-msg {
+    color: $errorRed;
+  }
+
+  &__success-msg {
+    color: $successGreen;
+  }
+
+  &__info-msg {
+    color: $whiteTransparent4;
+  }
+
+  input {
+    @include inputStyle1;
   }
 
   fieldset {
@@ -58,12 +70,14 @@
     justify-content: center;
     gap: 1rem;
   }
+
   &__lat-and-lon {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
+
     label {
       font-size: 20px;
       font-weight: bold;

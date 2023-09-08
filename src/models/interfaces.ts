@@ -6,8 +6,13 @@ interface IUserState {
   loggedInToken: string;
 }
 
+interface IMyQuizzes {
+  quizId: string;
+  userName: string;
+}
+
 interface IQuizzez {
-  questions: IUserQuizzes[];
+  questions: IUserQuizzes;
   quizId: string;
   userId: string;
   username: string;
@@ -18,15 +23,26 @@ interface IMapPosition {
   lng: number;
 }
 
-interface IUserQuizzes {
+interface IQuestions {
   question: string;
   answer: string;
-  location: IPosition;
+  location: ILocation;
 }
 
-interface IPosition {
-  latitude: number;
+interface ILocation {
   longitude: number;
+  latitude: number;
+}
+
+interface IUserQuizzes {
+  [x: string]: any; // Används för att kunna använda every.
+
+  question: string;
+  answer: string;
+  location: {
+    latitude: number;
+    longitude: number;
+  };
 }
 
 //------------------------------//
@@ -55,21 +71,26 @@ interface IQuizCardProps {
   fetchAndProcessQuizData: (clickedQuizCardId: string) => void;
 }
 
-interface IGetQuizezDataResponse {
-  success: boolean;
-  quizzes?: IQuizzez[];
-}
-
 interface IQuizzesProps {
   setUserQuizzes: React.Dispatch<React.SetStateAction<IUserQuizzes[] | []>>;
 }
 
+interface IMyQuizzesProps {
+  myQuizzesComponent: IMyQuizzes[];
+  setMyQuizzesComponent: React.Dispatch<React.SetStateAction<IMyQuizzes[]>>;
+}
+
 //------------------------------//
-// API RESPOONSES INTERFACES
+// API RESPONSES INTERFACES
 //------------------------------//
 interface ISignUpApiResponse {
   success: boolean;
   message?: string;
+}
+
+interface IGetQuizezDataResponse {
+  success: boolean;
+  quizzes?: IQuizzez[];
 }
 
 interface ILoginApiResponse {

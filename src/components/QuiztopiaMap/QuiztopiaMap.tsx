@@ -32,9 +32,7 @@ function QuiztopiaMap({
 
   useEffect(() => {
     // Check if the user is not logged in, if the user is not logged in, redirect them to the home page to make them sign in.
-    if (!loggedInUser) {
-      navigate("/");
-    }
+    loggedInUser ? null : navigate("/");
 
     if (mapGL.current || !mapContainer.current) return;
 
@@ -79,7 +77,6 @@ function QuiztopiaMap({
 
         setNewQuestionLat(lat);
         setNewQuestionLon(lng);
-        console.log(lng, lat);
       });
     }
   }, [isAddNewQuestionSliderOpen]);
@@ -107,6 +104,9 @@ function QuiztopiaMap({
 
   return (
     <section className="quiztopia-map">
+      <p>
+        Latitude: {lat} Longitude: {lng}
+      </p>
       <div ref={mapContainer} className="quiztopia-map__container" />
     </section>
   );

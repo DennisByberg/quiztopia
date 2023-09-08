@@ -1,15 +1,12 @@
-import { ReactNode, useEffect, useState } from "react";
-import QuizCard from "../QuizCard/QuizCard";
+import { useEffect, useState } from "react";
 import "./Quizzes.scss";
 import { scrollToTop } from "../../helpers/scrollToTop";
+import { v4 as getUniqueKey } from "uuid";
 
 function Quizzes({ setUserQuizzes }: IQuizzesProps) {
-  const [quizzesComponent, setQuizzesComponent] = useState<ReactNode[]>([]);
+  const [quizzesComponent, setQuizzesComponent] = useState<IQuizzez[]>([]);
 
   useEffect(() => {
-    /**
-     * Function to fetch quizzes from an API and render out quiz cards.
-     */
     async function getAllQuizzesFromAPI() {
       try {
         const response = await fetch(
@@ -17,21 +14,22 @@ function Quizzes({ setUserQuizzes }: IQuizzesProps) {
         );
 
         const data: IGetQuizezDataResponse = await response.json();
-        console.log(data.quizzes);
 
         if (data.quizzes) {
-          const quizComponents = data.quizzes
-            .filter(
-              (quiz) => quiz.quizId !== undefined && quiz.username !== undefined
-            )
-            .map((quiz) => (
-              <QuizCard
-                fetchAndProcessQuizData={fetchAndProcessQuizData}
-                key={quiz.quizId}
-                userName={quiz.username}
-                quizId={quiz.quizId}
-              />
-            ));
+          const quizComponents = data.quizzes.filter((quiz) => {
+            return (
+              quiz.quizId !== undefined &&
+              quiz.quizId.length < 18 &&
+              quiz.username !== undefined &&
+              quiz.username.length < 18 &&
+              quiz.questions.every((question: IQuestions) => {
+                return (
+                  typeof question?.location?.latitude === "number" &&
+                  typeof question?.location?.longitude === "number"
+                );
+              })
+            );
+          });
           setQuizzesComponent(quizComponents);
         }
       } catch (error) {
@@ -39,44 +37,54 @@ function Quizzes({ setUserQuizzes }: IQuizzesProps) {
       }
     }
 
-    /**
-     * function to fetch and process quiz data for a selected quiz.
-     * @param clickedQuizCardId - The quizId of the card we press in QuizCard
-     */
-    async function fetchAndProcessQuizData(clickedQuizCardId: string) {
-      try {
+    getAllQuizzesFromAPI();
+  }, [setUserQuizzes]);
+
+  async function fetchAndProcessQuizData(clickedQuizCardId: string) {
+    try {
+      const response = await fetch(`${import.meta.env.VITE_SWAGGER_URL}/quiz`);
+      const data: IGetQuizezDataResponse = await response.json();
+
+      if (data.quizzes) {
         const response = await fetch(
           `${import.meta.env.VITE_SWAGGER_URL}/quiz`
         );
-
         const data: IGetQuizezDataResponse = await response.json();
 
         if (data.quizzes) {
-          // Find the quiz object with the matching 'quizId'.
           const foundQuiz = data.quizzes.find(
             (quiz) => quiz.quizId === clickedQuizCardId
           );
-          // Extract the 'questions' property from the found quiz or use an empty array if not found.
-          const questions = foundQuiz?.questions || [];
 
-          // Iterate through the questions array and add each question to a user's quiz list.
-          questions.forEach((question) => {
-            setUserQuizzes((prev: IUserQuizzes[]) => prev.concat(question));
-          });
+          if (foundQuiz) {
+            // lyckas inte få denna att funka... enda any i projektet...
+            const questions: any = foundQuiz.questions || [];
+            console.log(questions);
+
+            setUserQuizzes(questions);
+          }
         }
-      } catch (error) {
-        console.error("Error in fetchData:", error);
       }
-      scrollToTop();
+    } catch (error) {
+      console.error("Error in fetchData:", error);
     }
-
-    getAllQuizzesFromAPI();
-  }, []);
+    scrollToTop();
+  }
 
   return (
     <section className="quizzez">
-      <h2>Available Quizzez</h2>
-      <ul>{quizzesComponent}</ul>
+      <h2>Available Quizzes</h2>
+      <ul>
+        {quizzesComponent.map((quiz: any) => (
+          <li className="quiz-card" key={getUniqueKey()}>
+            <p className="quiz-card__quiz-name">{quiz.quizId}</p>
+            <p className="quiz-card__username">Made by {quiz.username}</p>
+            <button onClick={() => fetchAndProcessQuizData(quiz.quizId)}>
+              Show Questions
+            </button>
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }

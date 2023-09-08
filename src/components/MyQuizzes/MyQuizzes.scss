@@ -1,0 +1,60 @@
+@import "../../sass/colors";
+@import "../../sass/mixins";
+
+.my-quizzes {
+  margin: 1rem auto;
+
+  display: flex;
+  flex-direction: column;
+  max-width: 1000px;
+
+  h2 {
+    text-align: center;
+    margin: 1rem 0;
+    border-bottom: 3px solid $whiteTransparent1;
+  }
+
+  p {
+    text-align: center;
+    font-style: italic;
+    color: $whiteTransparent2;
+  }
+
+  ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2rem;
+    max-width: 1000px;
+    margin-inline: auto;
+
+    li {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 350px;
+      justify-content: center;
+
+      flex-grow: 1;
+
+      padding: 2rem 4rem;
+      border-radius: 5px;
+
+      border: 2px solid $black;
+      box-shadow: 5px 5px 5px $black;
+      gap: 1rem;
+      margin: 1rem auto;
+
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    p {
+      font-weight: bold;
+    }
+
+    button {
+      @include buttonStyle1;
+    }
+  }
+}
